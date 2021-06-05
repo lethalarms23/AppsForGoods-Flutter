@@ -27,7 +27,7 @@ class _AddToCartState extends State<AddToCart> {
               widget.name,
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            Image.network(widget.url, height: 120,),
+            Image.asset(widget.url, height: 120,),
             TextButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),

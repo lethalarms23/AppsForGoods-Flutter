@@ -17,7 +17,7 @@ class SearchWidget extends StatelessWidget{
               labelText: 'Search',
             ),
           ),
-          Image.network('https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/8/8/8823_5.jpg', height: 350,),
+          Image.asset('assets/images/pc.png', height: 350,),
           TextButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/providers/knowledge_level.dart';
+import 'package:flutter_application_1/providers/dark-mode.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'main.dart';
 import 'feedback.dart';
@@ -10,13 +11,20 @@ class UserSettingsWidget extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'PCBuilding'),
-    );
+    if(context.read(darkModeState).state == darkMode.isDark){
+      return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData.dark(),
+        home: MyHomePage(title: 'PCBuilding'),
+      );
+    }
+    else{
+      return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData.light(),
+        home: MyHomePage(title: 'PCBuilding'),
+      );
+    }
   }
 }
 
@@ -42,6 +50,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget build(BuildContext context) {
+    getBoolDark(){
+      if(context.read(darkModeState).state == darkMode.isDark){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    bool currentBoolDark = getBoolDark();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -95,7 +113,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: Text(
                     'Feedback',
-                    style: TextStyle(color: Colors.black),
                   ),
                 ),
                 TextButton(
@@ -114,6 +131,31 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
+                Checkbox(
+                    value: currentBoolDark,
+                    onChanged: (bool? value){
+                      setState(() {
+                        if(context.read(darkModeState).state == darkMode.isDark){
+                          context.read(darkModeState).state = darkMode.isNotDark;
+                          Navigator.pop(context);
+                          Navigator.push(context, new MaterialPageRoute(
+                              builder: (context) =>
+                              new UserSettingsWidget())
+                          );
+                        }
+                        else{
+                          context.read(darkModeState).state = darkMode.isDark;
+                          Navigator.pop(context);
+                          Navigator.push(context, new MaterialPageRoute(
+                              builder: (context) =>
+                              new UserSettingsWidget())
+                          );
+                        }
+                        currentBoolDark = value!;
+                      });
+                    }
+                ),
+                Text('Ativar Dark Theme'),
               ],
             ),
           ],

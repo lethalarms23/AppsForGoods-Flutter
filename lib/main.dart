@@ -5,6 +5,7 @@ import 'home.dart';
 import 'cart.dart';
 import 'user-settings.dart';
 import 'build.dart';
+import 'package:flutter_application_1/providers/dark-mode.dart';
 
 void main(){
   runApp(
@@ -16,13 +17,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'PCBuilding'),
-    );
+    if(context.read(darkModeState).state == darkMode.isDark){
+      return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData.dark(),
+        home: MyHomePage(title: 'PCBuilding'),
+      );
+    }
+    else{
+      return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData.light(),
+        home: MyHomePage(title: 'PCBuilding'),
+      );
+    }
   }
 }
 

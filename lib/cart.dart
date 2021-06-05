@@ -10,7 +10,7 @@ class Cart extends StatefulWidget {
   Cart({Key? key,  this.url, this.name}) : super(key: key);
   getUrl(){
     if(url != null){
-      return Image.network(url, height: 120,);
+      return Image.asset(url, height: 120,);
     }
     else{
       return Text(
@@ -23,7 +23,6 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart>{
-  @override
   var _chosenValue = 'Sim';
   Widget build(BuildContext context) {
     return Center(
@@ -55,16 +54,14 @@ class _CartState extends State<Cart>{
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                "Encomendar por UberComponentes",
+                "Encomendar por PCBuilding",
                 style: TextStyle(
-                    color: Colors.black,
                     fontSize: 14,
                     fontWeight: FontWeight.w500),
               ),
               DropdownButton<String>(
                 focusColor:Colors.white,
                 value: _chosenValue,
-                style: TextStyle(color: Colors.white),
                 iconEnabledColor:Colors.black,
                 items: <String>[
                   'Sim',
@@ -72,7 +69,7 @@ class _CartState extends State<Cart>{
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value,style:TextStyle(color:Colors.black),),
+                    child: Text(value,style:TextStyle(),),
                   );
                 }).toList(),
                 onChanged: (String? value) {
