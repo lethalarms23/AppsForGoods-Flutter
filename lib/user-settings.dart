@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/providers/knowledge_level.dart';
-import 'package:flutter_application_1/providers/dark-mode.dart';
+import 'package:PCBuilding/providers/knowledge_level.dart';
+import 'package:PCBuilding/providers/dark-mode.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'main.dart';
 import 'feedback.dart';

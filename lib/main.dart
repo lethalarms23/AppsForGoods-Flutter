@@ -5,7 +5,7 @@ import 'home.dart';
 import 'cart.dart';
 import 'user-settings.dart';
 import 'build.dart';
-import 'package:flutter_application_1/providers/dark-mode.dart';
+import 'package:PCBuilding/providers/dark-mode.dart';
 
 void main(){
   runApp(
