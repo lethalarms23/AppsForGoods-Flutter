@@ -6,6 +6,7 @@ import 'cart.dart';
 import 'user-settings.dart';
 import 'build.dart';
 import 'package:PCBuilding/providers/dark-mode.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 void main(){
   runApp(
@@ -55,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -90,12 +92,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 BottomNavigationBarItem(
                   icon: Icon(Icons.computer),
                   label: 'Builds',
-                  backgroundColor: Colors.purple,
+                  backgroundColor: Colors.teal,
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.shopping_cart_outlined),
                   label: 'Carrinho',
-                  backgroundColor: Colors.red,
+                  backgroundColor: Colors.orangeAccent,
                 ),
               ],
               currentIndex: _selectedIndex,

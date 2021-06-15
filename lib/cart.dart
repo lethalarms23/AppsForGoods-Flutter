@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:PCBuilding/providers/city_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'main.dart';
 
 void main() =>runApp(MaterialApp());
@@ -22,8 +24,9 @@ class Cart extends StatefulWidget {
   _CartState createState() => _CartState();
 }
 
-class _CartState extends State<Cart>{
+class _CartState extends State<Cart> {
   var _chosenValue = 'Sim';
+
   Widget build(BuildContext context) {
     return Center(
       child: Column(
@@ -31,7 +34,10 @@ class _CartState extends State<Cart>{
         children: [
           Text(
             "Carrinho",
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme
+                .of(context)
+                .textTheme
+                .headline5,
           ),
           widget.getUrl(),
           TextButton(
@@ -53,23 +59,26 @@ class _CartState extends State<Cart>{
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                "Encomendar por PCBuilding",
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500),
-              ),
+              if (context
+                  .read(cityLocationState)
+                  .state != cityLocation.Other)
+                Text(
+                  "Encomendar por PCBuilding",
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500),
+                ),
               DropdownButton<String>(
-                focusColor:Colors.white,
+                focusColor: Colors.white,
                 value: _chosenValue,
-                iconEnabledColor:Colors.black,
+                iconEnabledColor: Colors.black,
                 items: <String>[
                   'Sim',
                   'Não',
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value,style:TextStyle(),),
+                    child: Text(value, style: TextStyle(),),
                   );
                 }).toList(),
                 onChanged: (String? value) {
@@ -78,6 +87,10 @@ class _CartState extends State<Cart>{
                   });
                 },
               ),
+              if(context
+                  .read(cityLocationState)
+                  .state == cityLocation.Other)
+                Text('Entrega no dia não disponivel na sua localidade'),
             ],
           )
         ],

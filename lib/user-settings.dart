@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:PCBuilding/providers/knowledge_level.dart';
 import 'package:PCBuilding/providers/dark-mode.dart';
+import 'package:PCBuilding/providers/city_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'main.dart';
 import 'feedback.dart';
@@ -37,6 +38,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   double currentSliderValue = 1;
+  var _chosenValue = 'Porto';
   getSliderLabel(){
       if(currentSliderValue <= 33){
         return 'Iniciante';
@@ -50,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget build(BuildContext context) {
+
     getBoolDark(){
       if(context.read(darkModeState).state == darkMode.isDark){
         return true;
@@ -63,7 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-
       ),
       body: Center(
         child: Column(
@@ -98,6 +100,46 @@ class _MyHomePageState extends State<MyHomePage> {
                   } else {
                     context.read(knowledgeLevelProvider).state = KnowledgeLevel.Avancado;
                   }
+                });
+              },
+            ),
+            Text(
+              "Encomendar por PCBuilding",
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500),
+            ),
+            DropdownButton<String>(
+              focusColor:Colors.white,
+              value: _chosenValue,
+              iconEnabledColor:Colors.black,
+              items: <String>[
+                'Porto',
+                'Viana do castelo',
+                'Vila do Conde',
+                'Viseu',
+                'Vizela',
+                'Valongo',
+                'Coimbra',
+                'Lisboa',
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value,style:TextStyle(),),
+                );
+              }).toList(),
+              onChanged: (String? value) {
+                setState(() {
+                  if(value == 'Porto'){
+                    context.read(cityLocationState).state = cityLocation.Porto;
+                  }
+                  else if(value == 'Lisboa'){
+                    context.read(cityLocationState).state = cityLocation.Lisboa;
+                  }
+                  else{
+                    context.read(cityLocationState).state = cityLocation.Other;
+                  }
+                  _chosenValue = value!;
                 });
               },
             ),
@@ -164,3 +206,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
